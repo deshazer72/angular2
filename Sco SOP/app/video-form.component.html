@@ -1,0 +1,70 @@
+<div class="container">
+    <h1>Walmart Store Operating Procedure "SOP"</h1>
+        <router-outlet></router-outlet>
+    <form name="vidForm" (ngSubmit)="upLoad()" #videoForm="ngForm">
+        <div class="innerForm">
+            <label>SOP description: </label>
+            <input type="text" class="form-control" [(ngModel)]="sop.description" id="sopDescription" name="sopDescription" maxlength="140"
+                placeholder="description can only be 140 characters long">
+            <label>Country: </label>
+            <div *ngFor="let country of countrys">
+                <input type="checkbox" [name]="country.display" [(ngModel)]="country.isChecked" [value]="country.value">{{country.display}}
+            </div><br>
+            <label>Store Type: </label>
+            <div *ngFor="let storeType of storeTypes">
+                <input type="checkbox" [name]="storeType.display" [(ngModel)]="storeType.isChecked" [value]="storeType.value">{{storeType.display}}
+            </div><br>
+            <label>Sco Type: </label>
+            <div *ngFor="let scoType of scoTypes">
+                <input type="checkbox" [name]="scoType.display" [(ngModel)]="scoType.isChecked" [value]="scoType.value">{{scoType.display}}
+            </div><br>
+            <label>Audience: </label>
+            <div *ngFor="let audience of audiences">
+                <input type="checkbox" [name]="audience.display" [(ngModel)]="audience.isChecked" [value]="audience.value">{{audience.display}}
+            </div><br>
+            <label>Sop Type: </label>
+            <div *ngFor="let sopType of sopTypes">
+                <input type="checkbox" [name]="sopType.display" [(ngModel)]="sopType.isChecked" [value]="sopType.value">{{sopType.display}}
+            </div><br>
+            <label>Date Avaliable:</label>
+            <div>
+                <ng2-datepicker name="dateAvaliable" [(ngModel)]="dateAvaliable" [ngModelOPtions]="{standalone: true}"> </ng2-datepicker>
+            </div>
+            <label>Date Expires:</label>
+            <div>
+                <ng2-datepicker name="dateExpires" [(ngModel)]="dateExpires" [options]="{maxDate: dateExpires}" [ngModelOPtions]="{standalone: true}">
+                </ng2-datepicker>
+            </div>
+
+
+
+            <br>
+            <input type="file" (change)="fileChangeEvent($event)" name="videofile" placeholder="upload file..." class="form-control"
+                id="Video" accept="video/mp4, video/x-m4v, video/*" required>
+            <br>
+            <div id="myVideo">
+                <video [hidden]="filechosen" width="320" height="240" controls autoplay>
+                </video>
+            </div>
+
+            <div [hidden]="videoError" id="myVideoError">
+            </div>
+            <div [hidden]="postJsonVideo" id="postJsonVideo">
+                <p>Video Form data Uploaded</p>
+            </div>
+            <div [hidden]="postVideo" id="postVideo">
+                <p>Video File uploaded</p>
+            </div>
+
+            <button *ngIf="validfile" id="Submit" type="submit">Submit</button>
+
+            <div class="loading-overlay" *ngIf="loading">
+                <md-progress-circle mode="indeterminate"></md-progress-circle>
+                </div>
+
+
+        </div>
+
+    </form>
+
+</div>
